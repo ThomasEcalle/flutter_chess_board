@@ -34,7 +34,7 @@ class BoardModel extends Model {
   /// Refreshes board
   void refreshBoard() {
     if(game.game_over) {
-      onCheckMate("toto");
+      onCheckMate(game.turn.toString());
     }
     notifyListeners();
   }
