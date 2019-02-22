@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chess_board/src/board_model.dart';
 import 'package:flutter_chess_board/src/board_rank.dart';
 import 'package:scoped_model/scoped_model.dart';
+
 import 'chess_board_controller.dart';
 
 var whiteSquareList = [
@@ -121,16 +122,19 @@ class ChessBoard extends StatefulWidget {
   /// The color type of the board
   final BoardType boardType;
 
-  ChessBoard({
-    this.size = 200.0,
-    this.whiteSideTowardsUser = true,
-    @required this.onMove,
-    @required this.onCheckMate,
-    @required this.onDraw,
-    this.chessBoardController,
-    this.enableUserMoves = true,
-    this.boardType = BoardType.brown,
-  });
+  final String initialPosition;
+
+  ChessBoard(
+      {this.size = 200.0,
+      this.whiteSideTowardsUser = true,
+      @required this.onMove,
+      @required this.onCheckMate,
+      @required this.onDraw,
+      this.chessBoardController,
+      this.enableUserMoves = true,
+      this.boardType = BoardType.brown,
+      this.initialPosition =
+          'r1k4r/p2nb1p1/2b4p/1p1n1p2/2PP4/3Q1NB1/1P3PPP/R5K1 b - c3 0 19'});
 
   @override
   _ChessBoardState createState() => _ChessBoardState();
@@ -141,14 +145,14 @@ class _ChessBoardState extends State<ChessBoard> {
   Widget build(BuildContext context) {
     return ScopedModel(
       model: BoardModel(
-        widget.size,
-        widget.onMove,
-        widget.onCheckMate,
-        widget.onDraw,
-        widget.whiteSideTowardsUser,
-        widget.chessBoardController,
-        widget.enableUserMoves,
-      ),
+          widget.size,
+          widget.onMove,
+          widget.onCheckMate,
+          widget.onDraw,
+          widget.whiteSideTowardsUser,
+          widget.chessBoardController,
+          widget.enableUserMoves,
+          widget.initialPosition),
       child: Container(
         height: widget.size,
         width: widget.size,

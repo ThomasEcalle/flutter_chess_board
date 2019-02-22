@@ -1,7 +1,8 @@
 import 'dart:ui';
+
+import 'package:chess/chess.dart' as chess;
 import 'package:flutter_chess_board/src/chess_board_controller.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:chess/chess.dart' as chess;
 
 typedef Null MoveCallback(String moveNotation);
 typedef Null CheckMateCallback(String winColor);
@@ -28,12 +29,15 @@ class BoardModel extends Model {
   /// User moves can be enabled or disabled by this property
   bool enableUserMoves;
 
+  /// The potential initial position
+  String initialPosition;
+
   /// Creates a logical game
   chess.Chess game = chess.Chess();
 
   /// Refreshes board
   void refreshBoard() {
-    if(game.game_over) {
+    if (game.game_over) {
       onCheckMate(game.turn.toString());
     }
     notifyListeners();
@@ -46,7 +50,8 @@ class BoardModel extends Model {
       this.onDraw,
       this.whiteSideTowardsUser,
       this.chessBoardController,
-      this.enableUserMoves) {
+      this.enableUserMoves,
+      this.initialPosition) {
     chessBoardController?.game = game;
     chessBoardController?.refreshBoard = refreshBoard;
   }
