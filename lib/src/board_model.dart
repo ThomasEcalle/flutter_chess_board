@@ -54,6 +54,7 @@ class BoardModel extends Model {
       this.initialPosition) {
     chessBoardController?.game = game;
     chessBoardController?.refreshBoard = refreshBoard;
-    chessBoardController?.loadPGN(initialPosition);
+    chessBoardController?.game?.load(initialPosition);
+
   }
 }
